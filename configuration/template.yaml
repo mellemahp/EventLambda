@@ -1,0 +1,26 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Cloudformation template for api gateway serverless REST api
+
+Resources:
+  EventQueue: 
+    Type: AWS::SQS::Queue
+    Properties: 
+      RedrivePolicy: 
+        deadLetterTargetArn:  { "Fn::GetAtt": ["EventQueueDLQ", "Arn"] }
+        maxReceiveCount: 5
+  EventQueueDLQ: 
+    Type: AWS::SQS::Queue
+
+Outputs:
+  EventQueueName:
+    Description: Information about the value
+    Value: {"Fn::GetAtt": [ "EventQueue", "QueueName"]}
+    Export:
+      Name: EventQueue
+
+  EventQueueUrl:
+    Description: Information about the value
+    Value: !Ref EventQueue
+    Export:
+      Name: EventQueueUrl
