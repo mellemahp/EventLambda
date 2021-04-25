@@ -1,0 +1,25 @@
+{
+    "namespace": "com.hmellema.runepageApi",
+    "type": "record",
+    "name": "runePageEvent",
+    "fields": [
+        {
+            "name": "name",
+            "type": "string"
+        },
+        {
+            "name": "credits",
+            "type": [
+                "int",
+                "null"
+            ]
+        },
+        {
+            "name": "account",
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    ]
+}
